@@ -21,6 +21,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 2) Expressjs
 3) Nodejs
 4) MongoDB (atlas)
+5) Tailwind css
 
 ## Deploy on Vercel
 

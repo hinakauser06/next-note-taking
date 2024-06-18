@@ -1,6 +1,6 @@
 import { useNoteStore } from  "../store/note";
 
-export default function TaskCard(props) {
+export default function TaskCard(props: any) {
   const {deleteNote, updateNote} = useNoteStore();
   const { noteData } = props;
   return (

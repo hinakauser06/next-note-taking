@@ -1,7 +1,11 @@
 import { create } from "zustand";
 
+interface Notes {
+  data: any[];
+}
+
 type NoteStore = {
-  notes: [];
+  notes: Notes;
   addNote: (note: string) => Promise<void>;
   deleteNote: (id: string) => Promise<void>;
   updateNote: (id: string) => Promise<void>;
@@ -12,7 +16,9 @@ type NoteStore = {
 };
 
 export const useNoteStore = create<NoteStore>((set) => ({
-  notes: [],
+  notes: {
+    data: []
+  },
   alert: false,
   alertMessage: "",
   setAlert: (val) => {

@@ -1,4 +1,4 @@
-export default function HeaderText(props) {
+export default function HeaderText(props: any) {
   const { title } = props;
   return (
     <>

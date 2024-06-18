@@ -4,7 +4,7 @@ import { useNoteStore } from  "../store/note";
 
 export default function TaskList() {
   const {getNotes: handleAddToCart, notes} = useNoteStore();
-
+  const notesData = notes?.data;
   useEffect(() => {
     handleAddToCart();
     return () => {
@@ -13,8 +13,8 @@ export default function TaskList() {
   return (
     <>
       <ul className="list-decimal px-10 py-3">
-        {notes?.data &&
-          notes?.data.map((note) => (
+      { notesData &&
+        notesData.map((note: any) => (
             <li className="group/item py-3" key={note.data}>
               <TaskCard noteData={note} />
             </li>

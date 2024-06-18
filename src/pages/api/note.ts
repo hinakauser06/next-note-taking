@@ -1,11 +1,48 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Note from "../../../Model/Note";
-import connectDB from "@/pages/lib/connectDb";
+// import connectDB from "@/pages/lib/connectDb";
+
+import mongoose from "mongoose";
+
+const DATABASE_URL = process.env.DATABASE_URL;
+
+if (!DATABASE_URL) {
+  throw new Error(
+    "Please define the DATABASE_URL environment variable inside .env.local"
+  );
+}
+
+// @ts-ignore
+let cached = global.mongoose;
+
+if (!cached) {
+  // @ts-ignore
+  cached = global.mongoose = { conn: null, promise: null };
+}
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  async function connectDB() {
+    if (cached.conn) {
+      return cached.conn;
+    }
+  
+    if (!cached.promise) {
+      const opts = {
+        bufferCommands: false,
+      };
+  
+      cached.promise = mongoose
+        .connect(DATABASE_URL as string, opts)
+        .then((mongoose) => {
+          return mongoose;
+        });
+    }
+    cached.conn = await cached.promise;
+    return cached.conn;
+  }
   await connectDB();
   if (req.method === "POST") {
     const note = new Note({

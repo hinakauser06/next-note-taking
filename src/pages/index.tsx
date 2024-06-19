@@ -10,8 +10,7 @@ export default function Home() {
       <HeaderText title="My Notes" />
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div
-          className="sm:w-11/12 lg:w-2/4 bg-slate-300 h-4/5"
-          style={{ height: "50vh" }}
+          className="sm:w-11/12 lg:w-2/4 bg-slate-300 h-auto"
         >
           <SearchBar />
           { alert && <AlertCard /> }
